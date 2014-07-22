@@ -15,6 +15,11 @@ if [ 0${V} -ge 3 ]; then
     set -x
 fi
 
+# Echo all commands if V=3; maximum verbosity.
+if [ 0${V} -ge 3 ]; then
+    set -x
+fi
+
 # Check usage.
 if [ $# -lt 3 ]; then
     echo "Usage: $0 <output file> <symbol name> <input files> [...]"

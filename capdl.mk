@@ -27,7 +27,7 @@ dm:
 		STAGING_ROOT=$(BUILD_ROOT)/dm BUILD_ROOT=$(STAGE_ROOT)/dm
 	@echo "[DM] done."
 
-capDL-loader: kernel_elf common libsel4 libmuslc libcpio libsel4elf libsel4muslcsys
+capDL-loader: kernel_elf common libsel4 libmuslc libcpio libelf libsel4muslcsys
 	@echo "[capDL-loader] building..."
 	$(Q)CFLAGS= LDFLAGS= $(MAKE) $(MAKE_SILENT) -C $(BUILD_BASE)/$@ -f $(srctree)/.config -f $(TOOLS_ROOT)/dm/capDL-loader/Makefile \
 		BUILD_DIR=$(BUILD_BASE)/$@ SOURCE_DIR=$(TOOLS_ROOT)/dm/capDL-loader/ V=$(V) \

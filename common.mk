@@ -200,6 +200,10 @@ install-headers:
 		done ; \
 	fi
 
+# If ADL is defined, assume we are building a CAmkES app and want to suppress
+# the following targets.
+ifeq (${ADL},)
+
 ifeq (${CONFIG_BUILDSYS_CPP_SEPARATE},y)
 %.o: %.c_pp
 	@echo " [CC] $@"
@@ -229,13 +233,14 @@ endif
 	$(Q)$(call make-depend,$<,$@,$(patsubst %.o,%.d,$@))
 	$(Q)$(ASM) $(CFLAGS) -c $< -o $@
 
+%.bin: %.elf
+	$(call cp_file,$<,$@)
+endif
+
 %.a: $(OBJFILES)
 	@echo " [AR] $@"
 	$(Q)mkdir -p $(dir $@)
 	$(Q)$(AR) r $@ $(OBJFILES) > /dev/null 2>&1
-
-%.bin: %.elf
-	$(call cp_file,$<,$@)
 
 %.elf: $(OBJFILES)
 	@echo " [LINK] $@"
